@@ -436,6 +436,9 @@ footer {
     .left-column, .right-column {
         min-width: 100%;
         margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         
     }
 
@@ -484,6 +487,8 @@ footer {
 
         #contact {
             justify-content: center; 
+            display: flex;
+            align-items: center;
             margin: 0;
             padding: 0;        
         }
@@ -500,6 +505,7 @@ footer {
         
         display: flex;
         justify-content: center;
+        align-items: center;display: flex;
         align-items: center;
     }
 
@@ -509,6 +515,12 @@ footer {
         font-size:  0.7rem; 
         position:   fixed;
         background-color: darkblue;
+                 
+    }
+}
+}
+
+
                  
     }
 }
