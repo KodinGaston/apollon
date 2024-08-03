@@ -5,9 +5,11 @@
 }
 
 html, body {
+    
     margin: 0;
     padding: 0;
     width: 100%;
+    
 }
 
 h1 {
@@ -80,7 +82,7 @@ video#bg-video {
     width: 200px;
     height: 250px;
     top: 10%;
-    left: calc(50% - 100px);
+    left: calc(50% - 50px);
     transform-style: preserve-3d;
     transform: perspective(1000px);
     animation: autoRun 20s linear infinite;
@@ -193,13 +195,13 @@ nav:hover .menu {
 
 /* Añadir padding superior a las secciones */
 section {
-    padding-top: 100px; /* Ajusta esta medida según la altura de tu menú */
+    padding-top: 100px;  
     padding-left: 20px;
 }
 
 .row {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     gap: 20px;
     justify-content: space-between;
     margin: 10px;
@@ -207,10 +209,11 @@ section {
   
   .left-column,
   .right-column {
+
     flex: 1;
     padding: 10px;
-    min-width: 300px; 
-    
+    min-width: 300px;  
+    flex-direction: column;   
   }
   
   .left-column {
@@ -340,7 +343,7 @@ iframe {
   flex-direction: column; 
   align-items: center;  
   box-sizing: border-box;
-  width: 100%;  
+  width: 100%;
   
 
 }
@@ -389,7 +392,7 @@ footer {
 
 /* Media queries */
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 768px) {
 
     .banner .slider {
         width: 100px;
@@ -423,28 +426,41 @@ footer {
         padding-top: 10px;  
     }
 
+    #about {
+
+        width: 100%;        
+        display: flex;
+        flex-direction: column;  
+        align-items: center;         
+        justify-content: center;  
+    }
+
     body, body::before {
         margin: 0;
         align-items: center;
     }
 
     .row {
-        flex-direction: column;
-        align-items: center; /* Asegura que el contenido esté centrado */
+        flex-direction: column;         
+         
     }
+    
 
-    .left-column, .right-column {
-        min-width: 100%;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .left-column 
+    .right-column {
         
+        width: 100%;        
+        display: flex;
+        flex-direction: column;  
+        align-items: center;         
+        justify-content: center;  
+                                
+                                
     }
 
     .service-card {
         flex-direction: column;
-        align-items: center; /* Asegura que el contenido esté centrado */
+        align-items: center; 
     }
 
     .service-icon {
@@ -458,6 +474,7 @@ footer {
     }   
 
     h1, h2, h3 {
+
         font-size: 1rem; /* Ajusta este valor según sea necesario */
         text-align: center;
         padding: 5px;
@@ -471,53 +488,55 @@ footer {
 
     .highlight {
         
-        display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        text-align: left; 
+        margin: 0;
+                       
+    }}
+
+/* Ajustes específicos para pantallas táctiles de 300px a 700px */
+@media only screen and (max-width: 700px) and (min-width: 300px) {
+
+    #about, #contact {
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0 auto;
+        margin-right:0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .banner .content {
+        flex-direction: column;
         align-items: center;
     }
 
-    @media only screen and (max-width: 200px) {       
-
-        .iframe-container {
-            width: auto;
-            height: auto;
-            align-items: center;
-            
-        }
-
-        #contact {
-            justify-content: center; 
-            display: flex;
-            align-items: center;
-            margin: 0;
-            padding: 0;        
-        }
-
-        .section {
-
-            justify-content: center; 
-            margin: 0;
-            padding: 0;
-
-        }
-        
-    .highlight {
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;display: flex;
-        align-items: center;
+    .row {
+        flex-direction: column;
     }
 
-        footer {
-        padding:    0.2rem;
-        text-align: center;
-        font-size:  0.7rem; 
-        position:   fixed;
-        background-color: darkblue;
-                 
+    .left-column,
+    .right-column {
+        min-width: 100%;
+        padding: 5px;
+    }
+
+    .highlight,
+    .grid-item,
+    .column {
+        max-width: 100%;
+        margin: 0px;
+    }
+
+    nav {
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    section {
+        padding-left: 5px;
     }
 }
-}
-
-
