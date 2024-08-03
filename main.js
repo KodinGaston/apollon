@@ -76,55 +76,64 @@ document.addEventListener('DOMContentLoaded', () => {
             el.querySelector('::before').style.transform = `translateZ(-10px)`;
         }
     });
- 
     document.addEventListener('DOMContentLoaded', function() {
         const interactiveElements = document.querySelectorAll('.highlight, .grid-item, .column, .square');
-
-        interactiveElements.forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                applyDistortion(e, el);
-            });
-
-            el.addEventListener('touchmove', (e) => {
-                e.preventDefault(); // Evita el comportamiento predeterminado de desplazamiento táctil
-                applyDistortion(e, el);
-            });
-
-            el.addEventListener('mouseleave', () => {
-                resetEffect(el);
-            });
-
-            el.addEventListener('touchend', () => {
-                resetEffect(el);
-            });
-        });
-
+    
         function applyDistortion(e, el) {
             const rect = el.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-
+    
             // Calcula la distorsión en función del movimiento
             const offsetX = (x - centerX) / centerX;
             const offsetY = (y - centerY) / centerY;
-
+    
             // Aplicar transformaciones para simular hundimiento
             el.style.transform = `perspective(600px) rotateX(${offsetY * 10}deg) rotateY(${offsetX * 10}deg)`;
             el.style.boxShadow = `0 ${offsetY * 10}px ${offsetY * 20}px rgba(0, 0, 0, 0.3)`;
-
+    
             // Opcional: Para el borde
-            el.querySelector('::before').style.transform = `translateZ(-10px)`;
+            if (el.querySelector('::before')) {
+                el.querySelector('::before').style.transform = `translateZ(-10px)`;
+            }
         }
-
+    
         function resetEffect(el) {
             el.style.transform = 'perspective(600px) rotateX(0) rotateY(0)';
             el.style.boxShadow = '0 0 0 rgba(0, 0, 0, 0.3)';
-            el.querySelector('::before').style.transform = 'translateZ(0)';
+            if (el.querySelector('::before')) {
+                el.querySelector('::before').style.transform = 'translateZ(0)';
+            }
         }
+    
+        // Verificar si el dispositivo tiene soporte para puntero de tipo mouse
+        const hasMouse = window.matchMedia('(pointer: fine)').matches;
+    
+        interactiveElements.forEach(el => {
+            if (hasMouse) {
+                el.addEventListener('mousemove', (e) => {
+                    applyDistortion(e, el);
+                });
+    
+                el.addEventListener('mouseleave', () => {
+                    resetEffect(el);
+                });
+            } else {
+                // En dispositivos táctiles, evitamos el efecto
+                el.addEventListener('touchmove', (e) => {
+                    e.preventDefault(); // Evita el comportamiento predeterminado de desplazamiento táctil
+                    // No aplicamos el efecto de distorsión
+                });
+    
+                el.addEventListener('touchend', () => {
+                    resetEffect(el);
+                });
+            }
+        });
     });
-
+    
 
     
 
